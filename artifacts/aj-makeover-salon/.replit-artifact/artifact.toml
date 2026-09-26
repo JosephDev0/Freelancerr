@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "AJ Makeover Hair & Beauty Salon"
+description = "A polished bilingual salon website for AJ Makeover Hair & Beauty Salon in Girgaon, Mumbai, highlighting beauty services, customer trust, location, hours, and easy contact actions."
+version = "1.0.0"
+id = "artifacts/aj-makeover-salon"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25282
+
+[services.development]
+run = "pnpm --filter @workspace/aj-makeover-salon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/aj-makeover-salon", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/aj-makeover-salon/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25282"
+BASE_PATH = "/"
